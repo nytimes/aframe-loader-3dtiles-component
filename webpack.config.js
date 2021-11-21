@@ -7,6 +7,9 @@ module.exports = {
     static: __dirname,
     host: '0.0.0.0'
   },
+  resolve: {
+    extensions: [ '.js' ]
+  },
   entry: './index.js',
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   output: {
@@ -20,7 +23,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js/,
+        test: /\.js$/,
         exclude: /(node_modules)/,
         use: ['babel-loader']
       }

@@ -12,7 +12,7 @@
     "lint:fix": "semistandard --fix",
     "prepublish": "npm run dist",
     "ghpages": "ghpages",
-    "start": "webpack serve --host 0.0.0.0 --https --progress --port 5000",
+    "start": "webpack serve --host 0.0.0.0 --progress --https --port 5000",
     "test": "karma start ./tests/karma.conf.js",
     "test:firefox": "karma start ./tests/karma.conf.js --browsers Firefox",
     "test:chrome": "karma start ./tests/karma.conf.js --browsers Chrome"
@@ -79,7 +79,7 @@
     "sinon-chai": "^2.8.0",
     "snazzy": "^5.0.0",
     "superagent": "^3.8.2",
-    "three-loader-3dtiles": "^1.0.8",
+    "three-loader-3dtiles": "^1.0.9",
     "webpack": "^5.64.1",
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^4.5.0"

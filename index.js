@@ -6,6 +6,13 @@ if (typeof AFRAME === 'undefined') {
   throw new Error('Component attempted to register before AFRAME was available.');
 }
 
+const POINT_CLOUD_COLORING = {
+  'white': PointCloudColoring.White,
+  'intensity': PointCloudColoring.Intensity,
+  'classification': PointCloudColoring.Classification,
+  'elevation': PointCloudColoring.Elevation,
+  'rgb': PointCloudColoring.RGB
+}
 /**
  * 3D Tiles component for A-Frame.
  */
@@ -17,6 +24,8 @@ AFRAME.registerComponent('loader-3dtiles', {
     maximumSSE: { type: 'int', default: 16 },
     maximumMem: { type: 'int', default: 32 },
     distanceScale: { type: 'number', default: 1.0 },
+    pointcloudColoring: { type: 'string', default: 'white'},
+    pointcloudElevationRange: { type: 'array', default: ['0','400'] },
     wireframe: { type: 'boolean', default: false },
     showStats: { type: 'boolean', default: false },
     cesiumIONToken: { type: 'string' }
@@ -28,6 +37,7 @@ AFRAME.registerComponent('loader-3dtiles', {
     }
     const { model, runtime } = await this._initTileset();
     this.runtime = runtime;
+    this.runtime.setElevationRange(this.data.pointcloudElevationRange.map(n => Number(n)));
 
     this.el.setObject3D('tileset', model);
 
@@ -79,8 +89,10 @@ AFRAME.registerComponent('loader-3dtiles', {
       this.el.setObject3D('tileset', model);
       this.runtime = runtime;
     } else if (this.runtime) {
+      this.runtime.setPointCloudColoring(this._resolvePointcloudColoring(this.data.pointCloudColoring));
       this.runtime.setWireframe(this.data.wireframe);
       this.runtime.setViewDistanceScale(this.data.distanceScale);
+      this.runtime.setElevationRange(this.data.pointcloudElevationRange.map(n => Number(n)));
     }
 
     if (this.data.showStats && !this.stats) {
@@ -115,7 +127,18 @@ AFRAME.registerComponent('loader-3dtiles', {
       this.runtime.dispose();
     }
   },
+  _resolvePointcloudColoring() {
+    const pointCloudColoring = POINT_CLOUD_COLORING[this.data.pointcloudColoring];
+    if (!pointCloudColoring) {
+      console.warn("Invalid value for point cloud coloring");
+      return PointCloudColoring.White;
+    } else {
+      return pointCloudColoring;
+    }
+  },
   _initTileset: async function () {
+    const pointCloudColoring = this._resolvePointcloudColoring(this.data.pointcloudColoring);
+
     return Loader3DTiles.load({
       url: this.data.url,
       renderer: this.el.sceneEl.renderer,
@@ -127,7 +150,7 @@ AFRAME.registerComponent('loader-3dtiles', {
         maximumMemoryUsage: this.data.maximumMem,
         viewDistanceScale: this.data.distanceScale,
         wireframe: this.data.wireframe,
-        pointCloudColoring: PointCloudColoring.RGB,
+        pointCloudColoring: pointCloudColoring,
         updateTransforms: true
       }
     });
