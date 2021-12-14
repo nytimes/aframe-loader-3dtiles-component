@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NYT Mobile PG Demos</title>
+  <style>
+    body {
+      background-color: black;
+      font-family: sans-serif;
+      width: 100%;
+      max-width: 1240px;
+      padding: 4rem;
+      margin: 0 auto;
+      box-sizing: border-box;
+      color: white;
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+
+    header {
+      margin-bottom: 4rem;
+    }
+
+    header a {
+      display: block;
+    }
+
+    h1 {
+      font-size: inherit;
+      font-weight: 100;
+      margin-top: 3.5rem;
+    }
+
+    main {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .links {
+      width: 30%;
+      flex: 1 1 30%;
+      padding-right: 2rem;
+    }
+
+    .link {
+      margin-bottom: 3.5rem;
+      max-width: 550px;
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      padding-right: 2rem;
+      box-sizing: border-box;
+    }
+
+    .link * {
+      color: gray;
+    }
+
+    .link.active * {
+      color: white;
+    }
+
+    a.inline-link {
+      color: white;
+      display: inline;
+    }
+
+    .link:hover h2 {
+      text-decoration: underline;
+    }
+
+    h2 {
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+      margin-top: 0rem;
+      line-height: 1;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      color: white;
+      font-weight: 100;
+    }
+
+    .image-wrapper {
+      flex: 1 1 70%;
+      position: relative;
+      /* padding-left: 2rem; */
+    }
+
+    img {
+      min-width: 0;
+      max-width: 90%;
+      position: absolute;
+    }
+
+    img.hidden {
+      visibility: hidden;
+    }
+
+    @media (max-width: 1024px) {
+      body {
+        padding: 2rem;
+      }
+
+      header {
+        /* margin-bottom: 2rem; */
+      }
+
+      h2 {
+        line-height: 1.4;
+      }
+
+      .links {
+        width: 100%;
+      }
+
+      .link {
+        padding-right: 1rem;
+      }
+
+      .image-wrapper {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href='https://rd.nytimes.com/' target='_blank'>
+      <svg class="pointer Header-module--rdLogo--Be1DO" width="100" height="24" viewBox="0 0 100 24" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M26.7362 18.5092V5.93359H24.6528V1.06274H40.4514C42.2743 1.06274 43.4028 1.32843 44.5313 2.12547C46.007 3.18821 46.7882 4.7823 46.7882 6.90776C46.7882 8.8561 46.007 10.3616 44.7049 11.2472C44.2709 11.5129 43.8368 11.6901 42.7084 12.0443V12.1329C44.8785 12.4871 45.9202 13.107 46.5278 14.3469C46.875 15.1439 46.875 15.7638 46.875 17.5351V18.5092H48.1771V23.3801H38.7153V17.8008C38.7153 15.321 37.8473 14.524 35.5035 14.524H34.8091V18.5092H36.8924V23.3801H24.6528V18.5092H26.7362ZM38.5417 8.50186C38.5417 6.64208 37.7605 5.93359 35.8507 5.93359H34.8091V11.0701H35.9375C37.7605 11.1587 38.5417 10.2731 38.5417 8.50186Z"
+          fill="white"></path>
+        <path
+          d="M65.3645 21.166C63.1075 22.7601 60.4166 23.8228 57.2916 23.8228C52.6041 23.8228 49.7395 21.4317 49.7395 17.535C49.7395 14.5239 51.4756 12.5756 55.1214 10.8044L55.0346 10.7158C53.5589 9.21028 52.9513 7.97043 52.9513 6.55345C52.9513 3.45382 55.5555 0.619873 60.0693 0.619873C63.7152 0.619873 66.4061 2.65677 66.4061 5.66784C66.4061 7.17338 65.5381 8.85603 63.6284 10.3616L67.5346 13.9926C68.3159 13.107 68.8367 12.1328 69.1839 11.3357H67.9686V7.7933H74.6527V11.3357H73.177C72.2221 13.0184 71.1804 14.7896 70.052 16.2951L72.3957 18.4206H74.6527V23.2915H67.4478L65.3645 21.166ZM59.5485 19.0405C60.4166 19.0405 61.4582 18.7749 62.4131 18.2435L57.986 13.7269C56.6839 14.7896 56.3367 15.5867 56.3367 16.2951C56.3367 17.8007 57.7256 19.0405 59.5485 19.0405ZM61.3714 8.23611C62.8471 7.3505 63.1075 6.64201 63.1075 5.84496C63.1075 4.69367 62.3263 3.80806 61.1978 3.80806C60.243 3.80806 59.4617 4.60511 59.4617 5.57928C59.4617 6.37633 59.8957 6.9077 61.111 8.05899L61.3714 8.23611Z"
+          fill="white"></path>
+        <path
+          d="M78.5582 18.5092V5.93359H76.4749V1.06274H88.2804C90.3637 1.06274 91.9262 1.32843 93.4019 1.94835C97.5686 3.63101 99.9991 7.43913 99.9991 12.3985C99.9991 18.5092 96.0929 22.7602 90.2769 23.2915C89.3221 23.3801 88.8012 23.3801 88.5408 23.3801H76.4749V18.5092H78.5582ZM90.0165 17.4465C91.145 16.3838 91.6658 14.6126 91.6658 12.1329C91.6658 9.74171 91.145 8.14762 90.0165 6.90776C89.2352 6.11072 88.3672 5.84503 86.6311 5.93359V18.4207C88.3672 18.5092 89.1484 18.2436 90.0165 17.4465Z"
+          fill="white"></path>
+        <path
+          d="M18.1424 14.878C17.3611 16.9149 15.9722 18.509 13.9757 19.3947V14.878L16.4063 12.664L13.9757 10.45V7.43893C16.1458 7.26181 17.7083 5.66772 17.7083 3.63081C17.7083 0.973988 15.2778 0.0883789 13.8021 0.0883789C13.4549 0.0883789 13.1944 0.0883789 12.6736 0.17694V0.265501C12.8472 0.265501 13.1076 0.265501 13.1944 0.265501C14.1493 0.265501 14.9306 0.708305 14.9306 1.59391C14.9306 2.3024 14.4097 2.92233 13.3681 2.92233C10.9375 2.92233 8.15973 0.973988 5.03472 0.973988C2.25695 0.973988 0.434028 3.09945 0.434028 5.13635C0.434028 7.26181 1.64931 7.88174 2.86458 8.4131V8.32454C2.51736 8.05886 2.25695 7.61606 2.25695 6.90757C2.25695 5.9334 3.125 5.22491 4.16667 5.22491C6.77084 5.22491 10.9375 7.43893 13.5417 7.43893H13.8021V10.5386L11.3715 12.664L13.8021 14.878V19.3947C12.7604 19.7489 11.7188 19.926 10.6771 19.926C6.68403 19.926 4.07986 17.4463 4.07986 13.284C4.07986 12.3098 4.16667 11.3356 4.51389 10.3614L6.51042 9.47583V18.5976L10.5903 16.7378V7.43893L4.6007 10.1843C5.20833 8.4131 6.42361 7.08469 7.98611 6.3762V6.28764C3.90625 7.17325 0 10.2729 0 14.878C0 20.2803 4.42708 23.9998 9.63542 23.9998C15.1042 23.9998 18.2292 20.2803 18.2292 14.7895H18.1424V14.878Z"
+          fill="white"></path>
+      </svg>
+    </a>
+    <h1>
+      The demos below showcase our <a target="_blank" class="inline-link" href="https://github.com/nytimes/three-loader-3dtiles">3D Tiles loader</a> as an <a target="_blank" class="inline-link" href="https://aframe.io/">A-Frame</a> component:
+    </h1>
+  </header>
+
+  <main>
+    <div class='links'>
+
+      <a class='link active' href='examples/basic'>
+        <h2>Basic example</h2>
+        <p>Viewing a photogrammetry model tiled in RealityCapture within an A-Frame scene</p>
+      </a>
+
+      <a class='link' href='examples/webxr'>
+        <h2>WebXR</h2>
+        <p>Viewing a model in an WebXR environment with teleport controls</p>
+      </a>
+
+      <a class='link' href='examples/stats'>
+        <h2>Stats in XR</h2>
+        <p>Viewing 3D Tiles stats in a WebXR</p>
+      </a>
+    </div>
+    <div class='image-wrapper'>
+      <img src='examples/basic.jpg'/>
+      <img src='examples/webxr.jpg' class='hidden' />
+      <img src='examples/stats.jpg' class='hidden' />
+    </div>
+  </main>
+
+  <script type='text/javascript'>
+    const images = document.querySelectorAll('img')
+    const links = document.querySelectorAll('.link')
+    links.forEach((el, i) => {
+      el.addEventListener('mouseover', e => {
+        images.forEach(i => i.classList.add('hidden'))
+        images[i].classList.remove('hidden')
+        links.forEach(i => i.classList.remove('active'))
+        links[i].classList.add('active')
+      })
+      // el.addEventListener('mouseout', e => {
+      //   images[i].classList.add('hidden')
+      // })
+    })
+  </script>
+  <!-- GitHub Corner. -->
+  <a target="_blank" href="https://github.com/nytimes/aframe-loader-3dtiles-component" class="github-corner">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222; color:#fff; position: absolute; top: 0; border: 0; right: 0;">
+      <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg>
+  </a>
+  <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+  </style>
+ </body>
+</html>
