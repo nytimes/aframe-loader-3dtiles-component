@@ -7,12 +7,12 @@ if (typeof AFRAME === 'undefined') {
 }
 
 const POINT_CLOUD_COLORING = {
-  'white': PointCloudColoring.White,
-  'intensity': PointCloudColoring.Intensity,
-  'classification': PointCloudColoring.Classification,
-  'elevation': PointCloudColoring.Elevation,
-  'rgb': PointCloudColoring.RGB
-}
+  white: PointCloudColoring.White,
+  intensity: PointCloudColoring.Intensity,
+  classification: PointCloudColoring.Classification,
+  elevation: PointCloudColoring.Elevation,
+  rgb: PointCloudColoring.RGB
+};
 /**
  * 3D Tiles component for A-Frame.
  */
@@ -24,8 +24,8 @@ AFRAME.registerComponent('loader-3dtiles', {
     maximumSSE: { type: 'int', default: 16 },
     maximumMem: { type: 'int', default: 32 },
     distanceScale: { type: 'number', default: 1.0 },
-    pointcloudColoring: { type: 'string', default: 'white'},
-    pointcloudElevationRange: { type: 'array', default: ['0','400'] },
+    pointcloudColoring: { type: 'string', default: 'white' },
+    pointcloudElevationRange: { type: 'array', default: ['0', '400'] },
     wireframe: { type: 'boolean', default: false },
     showStats: { type: 'boolean', default: false },
     cesiumIONToken: { type: 'string' }
@@ -63,9 +63,8 @@ AFRAME.registerComponent('loader-3dtiles', {
             this.camera.fov = Math.atan2(1, fovi) * 2 * 180 / Math.PI;
           }
         });
-      }
-      catch (e) {
-        console.warn("Could not get VR camera");
+      } catch (e) {
+        console.warn('Could not get VR camera');
       }
     });
     this.el.sceneEl.addEventListener('exit-vr', (e) => {
@@ -127,10 +126,10 @@ AFRAME.registerComponent('loader-3dtiles', {
       this.runtime.dispose();
     }
   },
-  _resolvePointcloudColoring() {
+  _resolvePointcloudColoring () {
     const pointCloudColoring = POINT_CLOUD_COLORING[this.data.pointcloudColoring];
     if (!pointCloudColoring) {
-      console.warn("Invalid value for point cloud coloring");
+      console.warn('Invalid value for point cloud coloring');
       return PointCloudColoring.White;
     } else {
       return pointCloudColoring;
