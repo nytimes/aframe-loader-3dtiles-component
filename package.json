@@ -12,9 +12,7 @@
     "lint:fix": "semistandard --fix",
     "prepublish": "npm run dist",
     "start": "webpack serve --host 0.0.0.0 --progress --https --port 5000",
-    "test": "karma start --single-run --browsers ChromeHeadless ./tests/karma.conf.js",
-    "test:firefox": "karma start ./tests/karma.conf.js --browsers Firefox",
-    "test:chrome": "karma start ./tests/karma.conf.js --browsers Chrome"
+    "test": "karma start --single-run --browsers ChromeHeadlessNoSandbox ./tests/karma.conf.js"
   },
   "repository": {
     "type": "git",
