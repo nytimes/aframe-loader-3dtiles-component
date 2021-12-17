@@ -8,6 +8,15 @@ steps:
     commands:
       - npm install
 
+  - name: lint
+    image: node:12
+    commands:
+      - npm run lint
+    when:
+      branch:
+      - main
+      - dev
+
   - name: build
     image: node:12
     commands:
@@ -29,15 +38,6 @@ steps:
     image: node:12
     commands:
       - npm run test
-    when:
-      branch:
-      - main
-      - dev
-
-  - name: lint
-    image: node:12
-    commands:
-      - npm run lint
     when:
       branch:
       - main

@@ -1,8 +1,10 @@
 // Karma configuration.
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
 module.exports = function (config) {
   config.set({
     basePath: '../',
-    browsers: ['Firefox', 'Chrome'],
+    browsers: ['ChromeHeadless'],
     client: {
       captureConsole: true,
       mocha: { ui: 'tdd' }
@@ -10,7 +12,7 @@ module.exports = function (config) {
     envPreprocessor: ['TEST_ENV'],
     files: [
       // Define test files.
-      { pattern: 'tests/**/*.test.js' },
+      { pattern: 'tests/**/*.test.js', watched: false },
       // Serve test assets.
       { pattern: 'tests/assets/**/*', included: false, served: true }
     ],

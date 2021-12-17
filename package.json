@@ -12,7 +12,7 @@
     "lint:fix": "semistandard --fix",
     "prepublish": "npm run dist",
     "start": "webpack serve --host 0.0.0.0 --progress --https --port 5000",
-    "test": "karma start ./tests/karma.conf.js",
+    "test": "karma start --single-run --browsers ChromeHeadless ./tests/karma.conf.js",
     "test:firefox": "karma start ./tests/karma.conf.js --browsers Firefox",
     "test:chrome": "karma start ./tests/karma.conf.js --browsers Chrome"
   },
@@ -62,9 +62,8 @@
     "cross-env": "4.0.0",
     "karma": "^6.3.8",
     "karma-chai-shallow-deep-equal": "0.0.4",
-    "karma-chrome-launcher": "2.0.0",
+    "karma-chrome-launcher": "^3.1.0",
     "karma-env-preprocessor": "^0.1.1",
-    "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
     "karma-sinon-chai": "^2.0.2",
@@ -93,13 +92,14 @@
     ]
   },
   "devDependencies": {
-    "qs": ">=6.0.4",
-    "trim-newlines": ">=3.0.1",
     "@babel/preset-env": "^7.16.0",
     "acorn": "^8.5.0",
-    "xmldom": "github:xmldom/xmldom#0.7.0",
     "json-schema": ">=0.4.0",
     "karma-webpack": "^5.0.0",
-    "three": "^0.134.0"
+    "puppeteer": "^13.0.0",
+    "qs": ">=6.0.4",
+    "three": "^0.134.0",
+    "trim-newlines": ">=3.0.1",
+    "xmldom": "github:xmldom/xmldom#0.7.0"
   }
 }
