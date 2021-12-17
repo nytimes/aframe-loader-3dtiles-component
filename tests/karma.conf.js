@@ -6,10 +6,10 @@ module.exports = function (config) {
     basePath: '../',
     browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
-        ChromeHeadlessNoSandbox: {
-            base: 'ChromeHeadless',
-            flags: ['--no-sandbox']
-        }
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
     },
     client: {
       captureConsole: true,
