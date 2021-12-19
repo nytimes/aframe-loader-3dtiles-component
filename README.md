@@ -2,6 +2,7 @@
 
 [![Version](http://img.shields.io/npm/v/aframe-loader-3dtiles-component.svg?style=flat-square)](https://npmjs.org/package/aframe-loader-3dtiles-component)
 [![License](http://img.shields.io/npm/l/aframe-loader-3dtiles-component.svg?style=flat-square)](https://npmjs.org/package/aframe-loader-3dtiles-component)
+[![Build Status](https://cloud.drone.io/api/badges/nytimes/aframe-loader-3dtiles-component/status.svg)](https://cloud.drone.io/nytimes/aframe-loader-3dtiles-component)
 
 An [A-Frame](https://aframe.io) component for displaying _OGC 3D Tiles_ based on [nytimes/three-loader-3dtiles](https://github.com/nytimes/three-loader-3dtiles).
 
