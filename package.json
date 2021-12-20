@@ -14,6 +14,7 @@
     "start": "webpack serve --host 0.0.0.0 --progress --https --port 5000",
     "test": "karma start --single-run --browsers ChromeHeadlessNoSandbox ./tests/karma.conf.js"
   },
+  "precommit": ["lint"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nytimes/rd-aframe-3dtiles-component.git"
@@ -94,6 +95,7 @@
     "acorn": "^8.5.0",
     "json-schema": ">=0.4.0",
     "karma-webpack": "^5.0.0",
+    "pre-commit": "^1.2.2",
     "puppeteer": "^13.0.0",
     "qs": ">=6.0.4",
     "three": "^0.134.0",
