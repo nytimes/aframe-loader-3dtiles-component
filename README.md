@@ -19,7 +19,7 @@ An [A-Frame](https://aframe.io) component for displaying _OGC 3D Tiles_ based on
 The loader uses the [loaders.gl library](https://github.com/visgl/loaders.gl), which is part of the [vis.gl platform](https://vis.gl/), openly governed by the [Urban Computing Foundation](https://uc.foundation/). Development of the loader started at The New York Times R&D as an effort deliver massive 3D and Geographical journalism to readers. This A-Frame components makes _3D Tiles_ more accessible to creators and brings immersitve journalism into mixed realities on the web.
 
 ## Demos
-### Demos are available [here](https://nytimes.github.io/rd-aframe-loader-3dtiles-component).
+### Demos are available [here](https://nytimes.github.io/aframe-loader-3dtiles-component).
 
 
 ### Installation

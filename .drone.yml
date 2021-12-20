@@ -26,14 +26,6 @@ steps:
       - main
       - dev
 
-  - name: build-npm
-    image: node:12
-    commands:
-      - npm run dist
-    when:
-      event:
-      - tag
-
   - name: test
     image: node:12
     commands:
