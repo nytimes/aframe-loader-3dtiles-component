@@ -14,8 +14,8 @@
     <a-scene background="color: #ECECEC">
       <a-entity id="player">
         <a-camera id="camera"></a-camera>
-        <a-entity id="left-hand" oculus-touch-controls="hand: left" blink-controls></a-entity>
-        <a-entity id="right-hand" oculus-touch-controls="hand: right" blink-controls></a-entity>
+        <a-entity id="left-hand" oculus-touch-controls="hand: left" blink-controls="collisionEntities: #floor;"></a-entity>
+        <a-entity id="right-hand" oculus-touch-controls="hand: right" blink-controls="collisionEntities: #floor;"></a-entity>
       </a-entity>
       <a-entity
         id="tileset"
@@ -24,6 +24,14 @@
         loader-3dtiles="url: https://storage.googleapis.com/rd-big-files/tilesets_003/RAYSMITHSTUDIO/INTERIOR/1205_RAYSMITHSTUDIO_INT_10M_105x8K__10K-PN_50P_DB/tileset_tileset.json; maximumSSE: 48; cameraEl: #camera"
       >
       </a-entity>
+      <a-entity
+         id="floor"
+         geometry="primitive:plane;"
+         rotation="-90 -30.79 0"
+         scale="10.626 9.575 9.283"
+         position="-0.165 0 0.447"
+         visible="false"
+       ></a-entity>
       <a-sky color="#a8caff"></a-sky>
     </a-scene>
     <script>
