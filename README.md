@@ -34,7 +34,7 @@ The following example loads the library from CDN, as well as missing required co
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src='https://cdn.jsdelivr.net/npm/three@0.133.0/examples/js/utils/WorkerPool.js'></script>
   <script src='https://cdn.jsdelivr.net/npm/three@0.133.0/examples/js/loaders/KTX2Loader.js'></script>
-  <script src="https://cdn.jsdelivr.net/npm/aframe-loader-3dtiles-component@1.0.0/dist/aframe-loader-3dtiles-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-loader-3dtiles-component/dist/aframe-loader-3dtiles-component.min.js"></script>
 </head>
 ```
 ### Usage
