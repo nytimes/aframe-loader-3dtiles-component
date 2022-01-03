@@ -1,6 +1,6 @@
 {
   "name": "aframe-loader-3dtiles-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A component for displaying OGC 3D Tiles.",
   "main": "index.js",
   "unpkg": "dist/aframe-loader-3dtiles-component.min.js",
