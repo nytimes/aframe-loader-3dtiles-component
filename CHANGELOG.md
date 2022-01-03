@@ -1,5 +1,5 @@
 ## v1.0
 
-### v1.0.0
+### v1.0.1
 
-- First public release!
+- Bump to three-loader-3dtiles 1.1.3
