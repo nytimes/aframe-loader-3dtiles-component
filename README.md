@@ -107,10 +107,10 @@ Refer to [CONTRIBUTING.MD](./CONTRIBUTING.md) for general contribution instructi
 ## Roadmap
 Suggestions for future work include:
 
-- More elaborate test caess.
+- More elaborate test cases.
 - Better integration with the inspector.
 - Test AR scenarios.
-- Test point cloud scnearios.
+- Test point-cloud scenarios.
 - Could `THREE.Cache` be used manually?
 - Conversion to _Typescript_.
 
