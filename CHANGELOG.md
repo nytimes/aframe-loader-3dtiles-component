@@ -1,5 +1,5 @@
 ## v1.0
 
-### v1.0.2
+### v1.0.3
 
 - Bump to three-loader-3dtiles 1.1.3
