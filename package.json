@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nytimes/aframe-3dtiles-component.git"
+    "url": "git+https://github.com/nytimes/aframe-loader-3dtiles-component.git"
   },
   "keywords": [
     "aframe",
