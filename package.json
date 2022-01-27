@@ -100,7 +100,7 @@
     "pre-commit": "^1.2.2",
     "puppeteer": "^13.0.0",
     "qs": ">=6.0.4",
-    "three": "^0.134.0",
+    "three": "^0.137.0",
     "trim-newlines": ">=3.0.1",
     "xmldom": "github:xmldom/xmldom#0.7.0"
   }
