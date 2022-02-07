@@ -36,9 +36,6 @@ AFRAME.registerComponent('loader-3dtiles', {
       throw new Error('3D Tiles: Please add an active camera or specify the target camera via the cameraEl property');
     }
     const { model, runtime } = await this._initTileset();
-    this.runtime = runtime;
-    this.runtime.setElevationRange(this.data.pointcloudElevationRange.map(n => Number(n)));
-
     this.el.setObject3D('tileset', model);
 
     this.originalCamera = this.camera;
@@ -78,14 +75,19 @@ AFRAME.registerComponent('loader-3dtiles', {
       console.warn('3D Tiles loader cannot work with THREE.Cache, disabling.');
       THREE.Cache.enabled = false;
     }
+    await this._nextFrame();
+    this.runtime = runtime;
+    this.runtime.setElevationRange(this.data.pointcloudElevationRange.map(n => Number(n)));
   },
   update: async function (oldData) {
     if (oldData.url !== this.data.url) {
       if (this.runtime) {
         this.runtime.dispose();
+        this.runtime = null;
       }
       const { model, runtime } = await this._initTileset();
       this.el.setObject3D('tileset', model);
+      await this._nextFrame();
       this.runtime = runtime;
     } else if (this.runtime) {
       this.runtime.setPointCloudColoring(this._resolvePointcloudColoring(this.data.pointCloudColoring));
@@ -167,5 +169,12 @@ AFRAME.registerComponent('loader-3dtiles', {
       disabled: true
     });
     return stats;
+  },
+  _nextFrame: async function () {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
+      }, 0);
+    });
   }
 });
