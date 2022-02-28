@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <title>A-Frame 3D Tiles Component - Ray Smith example</title>
     <meta name="description" content="WebXR example for 3D Tiles component showing photogrammetry."></meta>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src='https://cdn.jsdelivr.net/npm/three@0.133.0/examples/js/utils/WorkerPool.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/three@0.133.0/examples/js/loaders/KTX2Loader.js'></script>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/utils/WorkerPool.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/loaders/KTX2Loader.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls/dist/aframe-blink-controls.min.js"></script>
     <script src="../../dist/aframe-loader-3dtiles-component.js"></script>
   </head>
   <body>
-    <a-scene background="color: #ECECEC">
+    <a-scene background="color: #ECECEC" renderer="colorManagement: true;">
       <a-entity id="player">
         <a-camera id="camera"></a-camera>
         <a-entity id="left-hand" oculus-touch-controls="hand: left" blink-controls="collisionEntities: #floor;"></a-entity>
