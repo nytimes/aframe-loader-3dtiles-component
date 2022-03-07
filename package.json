@@ -11,7 +11,7 @@
     "lint": "semistandard -v | snazzy",
     "lint:fix": "semistandard --fix",
     "prepublish": "npm run dist",
-    "start": "webpack serve --host 0.0.0.0 --progress --port 5000",
+    "start": "webpack serve --host 0.0.0.0 --progress --https --port 5000",
     "test": "karma start --single-run --browsers ChromeHeadlessNoSandbox ./tests/karma.conf.js"
   },
   "precommit": [
