@@ -11,7 +11,7 @@
     <script src="../../dist/aframe-loader-3dtiles-component.js"></script>
   </head>
   <body>
-    <a-scene background="color: #ECECEC" renderer="colorManagement: true;">
+    <a-scene background="color: #ECECEC" renderer="antialias: true; logarithmicDepthBuffer:true; colorManagement: true;">
       <a-entity id="player">
         <a-camera id="camera"></a-camera>
         <a-entity id="left-hand" oculus-touch-controls="hand: left" blink-controls="collisionEntities: #floor;"></a-entity>
@@ -19,10 +19,10 @@
       </a-entity>
       <a-entity
         id="tileset"
-        position="0 -0.237 0"
+        position="0 5.89 0"
         rotation="-90 0 0"
         scale="1.5 1.5 1.5"
-        loader-3dtiles="url: https://storage.googleapis.com/rd-big-files/tilesets_003/RAYSMITHSTUDIO/INTERIOR/1205_RAYSMITHSTUDIO_INT_10M_105x8K__10K-PN_50P_DB/tileset_tileset.json; maximumSSE: 48; cameraEl: #camera"
+        loader-3dtiles="url: https://int.nyt.com/data/3dtiles/1205_RAYSMITHSTUDIO_INT_10M_105x8K__10K-PN_50P_DB/tileset_tileset.json; maximumSSE: 48; cameraEl: #camera"
       >
       </a-entity>
       <a-entity
@@ -30,7 +30,7 @@
          geometry="primitive:plane;"
          rotation="-90 -30.79 0"
          scale="15.939 14.3625 13.9245"
-         position="-0.165 0 0.447"
+         position="-3.335 0 -2.253"
          visible="false"
        ></a-entity>
       <a-sky color="#a8caff"></a-sky>
