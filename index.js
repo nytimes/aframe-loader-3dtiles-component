@@ -144,8 +144,8 @@ AFRAME.registerComponent('loader-3dtiles', {
       url: this.data.url,
       renderer: this.el.sceneEl.renderer,
       options: {
-        dracoDecoderPath: 'https://unpkg.com/three@0.133.0/examples/js/libs/draco',
-        basisTranscoderPath: 'https://unpkg.com/three@0.133.0/examples/js/libs/basis',
+        dracoDecoderPath: 'https://unpkg.com/three@0.137.0/examples/js/libs/draco',
+        basisTranscoderPath: 'https://unpkg.com/three@0.137.0/examples/js/libs/basis',
         cesiumIONToken: this.data.cesiumIONToken,
         maximumScreenSpaceError: this.data.maximumSSE,
         maximumMemoryUsage: this.data.maximumMem,
