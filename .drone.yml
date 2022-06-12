@@ -6,7 +6,8 @@ steps:
   - name: install
     image: node:12
     commands:
-      - npm install
+      - npm install -g npm@latest 
+        && npm install
 
   - name: lint
     image: node:12
