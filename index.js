@@ -1,6 +1,6 @@
 import { Loader3DTiles, PointCloudColoring } from 'three-loader-3dtiles';
-import { Vector3 } from 'three';
 import './textarea';
+import { Vector3 } from 'three';
 
 if (typeof AFRAME === 'undefined') {
   throw new Error('Component attempted to register before AFRAME was available.');
@@ -39,6 +39,8 @@ AFRAME.registerComponent('loader-3dtiles', {
     this.el.setObject3D('tileset', model);
 
     this.originalCamera = this.camera;
+    this.el.sceneEl.renderer.preserveDrawingBuffer = true;
+
     this.el.sceneEl.addEventListener('camera-set-active', (e) => {
       // TODO: For some reason after closing the inspector this event is fired with an empty camera,
       // so revert to the original camera used.
@@ -106,7 +108,7 @@ AFRAME.registerComponent('loader-3dtiles', {
   },
   tick: function (t, dt) {
     if (this.runtime) {
-      this.runtime.update(dt, this.el.sceneEl.renderer, this.camera);
+      this.runtime.update(dt, this.el.sceneEl.clientHeight, this.camera);
       if (this.stats) {
         const worldPos = new Vector3();
         this.camera.getWorldPosition(worldPos);
@@ -139,19 +141,19 @@ AFRAME.registerComponent('loader-3dtiles', {
   },
   _initTileset: async function () {
     const pointCloudColoring = this._resolvePointcloudColoring(this.data.pointcloudColoring);
-
     return Loader3DTiles.load({
       url: this.data.url,
       renderer: this.el.sceneEl.renderer,
       options: {
-        dracoDecoderPath: 'https://unpkg.com/three@0.137.0/examples/js/libs/draco',
-        basisTranscoderPath: 'https://unpkg.com/three@0.137.0/examples/js/libs/basis',
         cesiumIONToken: this.data.cesiumIONToken,
+        dracoDecoderPath: 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco',
+        basisTranscoderPath: 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/basis',
         maximumScreenSpaceError: this.data.maximumSSE,
         maximumMemoryUsage: this.data.maximumMem,
+        memoryCacheOverflow: 128,
+        pointCloudColoring: pointCloudColoring,
         viewDistanceScale: this.data.distanceScale,
         wireframe: this.data.wireframe,
-        pointCloudColoring: pointCloudColoring,
         updateTransforms: true
       }
     });
