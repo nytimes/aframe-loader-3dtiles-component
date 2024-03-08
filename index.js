@@ -1,4 +1,4 @@
-import { Loader3DTiles, PointCloudColoring } from 'three-loader-3dtiles';
+import { Loader3DTiles, PointCloudColoring, GeoTransform } from 'three-loader-3dtiles';
 import './textarea';
 import { Vector3 } from 'three';
 
@@ -28,7 +28,12 @@ AFRAME.registerComponent('loader-3dtiles', {
     pointcloudElevationRange: { type: 'array', default: ['0', '400'] },
     wireframe: { type: 'boolean', default: false },
     showStats: { type: 'boolean', default: false },
-    cesiumIONToken: { type: 'string' }
+    cesiumIONToken: { type: 'string' },
+    googleApiKey: { type: 'string' },
+    lat: { type: 'number' },
+    long: { type: 'number' },
+    height: { type: 'number' },
+    geoTransform: { type: 'string', default: 'Reset' }
   },
   init: async function () {
     this.camera = this.data.cameraEl?.object3D.children[0] ?? document.querySelector('a-scene').camera;
@@ -36,6 +41,7 @@ AFRAME.registerComponent('loader-3dtiles', {
       throw new Error('3D Tiles: Please add an active camera or specify the target camera via the cameraEl property');
     }
     const { model, runtime } = await this._initTileset();
+
     this.el.setObject3D('tileset', model);
 
     this.originalCamera = this.camera;
@@ -48,6 +54,7 @@ AFRAME.registerComponent('loader-3dtiles', {
       // TODO: Does not provide the right Inspector perspective camera
       this.camera = e.detail.cameraEl.object3D.children[0] ?? this.originalCamera;
     });
+
     this.el.sceneEl.addEventListener('enter-vr', (e) => {
       this.originalCamera = this.camera;
       try {
@@ -88,7 +95,9 @@ AFRAME.registerComponent('loader-3dtiles', {
         this.runtime = null;
       }
       const { model, runtime } = await this._initTileset();
+      
       this.el.setObject3D('tileset', model);
+
       await this._nextFrame();
       this.runtime = runtime;
     } else if (this.runtime) {
@@ -104,6 +113,20 @@ AFRAME.registerComponent('loader-3dtiles', {
     if (!this.data.showStats && this.stats) {
       this.el.sceneEl.removeChild(this.stats);
       this.stats = null;
+    }
+
+    // set parameters for google 3dtiles API
+    if (this.data.lat && this.data.long && this.data.height) {
+      const {model, runtime} = await this._initTileset();
+
+      console.log(this.data.lat, this.data.long, this.data.height)
+      
+      this.runtime.orientToGeocoord({
+        lat: Number(this.data.lat), 
+        long: Number(this.data.long), 
+        height: Number(this.data.height)
+      });
+
     }
   },
   tick: function (t, dt) {
@@ -145,6 +168,7 @@ AFRAME.registerComponent('loader-3dtiles', {
       url: this.data.url,
       renderer: this.el.sceneEl.renderer,
       options: {
+        googleApiKey: this.data.googleApiKey,
         cesiumIONToken: this.data.cesiumIONToken,
         dracoDecoderPath: 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco',
         basisTranscoderPath: 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/basis',
@@ -154,7 +178,8 @@ AFRAME.registerComponent('loader-3dtiles', {
         pointCloudColoring: pointCloudColoring,
         viewDistanceScale: this.data.distanceScale,
         wireframe: this.data.wireframe,
-        updateTransforms: true
+        updateTransforms: true,
+        geoTransform: GeoTransform[this.data.geoTransform]
       }
     });
   },
