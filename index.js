@@ -95,7 +95,7 @@ AFRAME.registerComponent('loader-3dtiles', {
         this.runtime = null;
       }
       const { model, runtime } = await this._initTileset();
-      
+
       this.el.setObject3D('tileset', model);
 
       await this._nextFrame();
@@ -117,16 +117,16 @@ AFRAME.registerComponent('loader-3dtiles', {
 
     // set parameters for google 3dtiles API
     if (this.data.lat && this.data.long && this.data.height) {
-      const {model, runtime} = await this._initTileset();
+      // eslint-disable-next-line no-unused-vars
+      const { model, runtime } = await this._initTileset();
 
-      console.log(this.data.lat, this.data.long, this.data.height)
-      
+      console.log(this.data.lat, this.data.long, this.data.height);
+
       this.runtime.orientToGeocoord({
-        lat: Number(this.data.lat), 
-        long: Number(this.data.long), 
+        lat: Number(this.data.lat),
+        long: Number(this.data.long),
         height: Number(this.data.height)
       });
-
     }
   },
   tick: function (t, dt) {
