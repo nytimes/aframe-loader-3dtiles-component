@@ -90,6 +90,15 @@ require('aframe-loader-3dtiles-component');
 | wireframe | boolean | (Optional) When viewing b3dm (mesh) tiles, show meshes as wireframe. Can be updated at runtime. | false | 
 | showStats | boolean | (Optional) Attaches a box with tilestats to the scene, useful for debugging. | false | 
 | cesiumIONToken | string | (Optional) A Cesium ION access token when loading tilesets from Cesium ION. | '' |
+| googleApiKey | string | (Optional) Google API Key for loading Google Maps 3D Tiles. | '' |
+| lat | int |  (Optional) latitude coordinate for google 3D Tiles API. | '' |
+| long | int | (Optional) longitude coordinate for google 3D Tiles API. | '' |
+| height | int | (Optional) camera height for google 3D Tiles API. | '' |
+| geoTransform | string | (Optional) How to handle geo transformations: Reset any geo location and place the model at (0,0,0), Apply Mercator projection (for use with ccommon 2D mapping applications, or convert WGS84 long/lat to 3D cartesian coordinates). Possible values: 'Reset', 'Mercator', 'WGS84Cartesian' | 'Reset' |
+
+### Using Google Tiles API
+To use with the Google Tiles API, you need to specify googleApiKey, geoTrnasform: 'Mercator' or 'WGS84Cartesian' (see geoTransform property). To set coordinates use: lat, long, height.
+To get a 'Google API key', go to the Google Cloud Console and follow the instructions to create an Maps JavaScript API key. Then you need to enable the Google Map Tiles API option on the APIs & Services page.
 
 ### Camera Requirement
 To use the `loader-3dtiles` component, your A-Frame scene must have a camera defined using [`<a-camera>`](https://aframe.io/docs/1.2.0/primitives/a-camera.html) or the [`camera` component](https://aframe.io/docs/1.2.0/components/camera.html) . The component will attempt to use one of these automatically, or you can specify your own selector with the `cameraEl` property.
