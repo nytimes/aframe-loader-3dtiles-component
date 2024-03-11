@@ -96,9 +96,14 @@ require('aframe-loader-3dtiles-component');
 | height | int | (Optional) camera height for google 3D Tiles API. | '' |
 | geoTransform | string | (Optional) How to handle geo transformations: Reset any geo location and place the model at (0,0,0), Apply Mercator projection (for use with ccommon 2D mapping applications, or convert WGS84 long/lat to 3D cartesian coordinates). Possible values: 'Reset', 'Mercator', 'WGS84Cartesian' | 'Reset' |
 
-### Using Google Tiles API
-To use with the Google Tiles API, you need to specify googleApiKey, geoTrnasform: 'Mercator' or 'WGS84Cartesian' (see geoTransform property). To set coordinates use: lat, long, height.
-To get a 'Google API key', go to the Google Cloud Console and follow the instructions to create an Maps JavaScript API key. Then you need to enable the Google Map Tiles API option on the APIs & Services page.
+### Using Google 3D Tiles API
+To use with the Google Maps 3D Map Tiles API, you need to specify `googleApiKey`, `geoTransform`: 'Mercator' or 'WGS84Cartesian' (see geoTransform property). To set coordinates use: `lat`, `long`, `height`.
+
+To get a 'Google API key', go to the Google Cloud Console and follow the instructions to [create an Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/cloud-setup). Then you need to enable the Google Map Tiles API option on the APIs & Services page.
+
+Please note there are costs from Google to provide this service to users of your application. [Pricing starts at $6 per 1,000 loads](https://developers.google.com/maps/documentation/tile/usage-and-billing#p3dt).
+
+To prevent huge surprise bills, Google 3D Tiles has a [low default quota cap of 300 root JSON load events per day](https://developers.google.com/maps/documentation/tile/usage-and-billing#photorealistic-3d-tiles) which effectively means a limit of roughly 300 unique users per day. This cap is ok for development but you may wish to request a quota increase to support more users in a production application. The fastest route to approval is to [directly contact the Maps support team](https://developers.google.com/maps/support#contact-maps-support), which is separate from GCP billing or other teams. You will get a quick response but it may take up to 2 business days to lift the quota. Expect to provide additional information about your product, use case and target audience. Caching 3d tiles responses is not permitted by the terms of use.
 
 ### Camera Requirement
 To use the `loader-3dtiles` component, your A-Frame scene must have a camera defined using [`<a-camera>`](https://aframe.io/docs/1.2.0/primitives/a-camera.html) or the [`camera` component](https://aframe.io/docs/1.2.0/components/camera.html) . The component will attempt to use one of these automatically, or you can specify your own selector with the `cameraEl` property.
