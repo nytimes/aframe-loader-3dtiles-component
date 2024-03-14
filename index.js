@@ -45,7 +45,6 @@ AFRAME.registerComponent('loader-3dtiles', {
     this.el.setObject3D('tileset', model);
 
     this.originalCamera = this.camera;
-    this.el.sceneEl.renderer.preserveDrawingBuffer = true;
 
     this.el.sceneEl.addEventListener('camera-set-active', (e) => {
       // TODO: For some reason after closing the inspector this event is fired with an empty camera,
