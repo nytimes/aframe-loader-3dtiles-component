@@ -1,6 +1,6 @@
-import { Loader3DTiles, PointCloudColoring } from 'three-loader-3dtiles';
-import { Vector3 } from 'three';
+import { Loader3DTiles, PointCloudColoring, GeoTransform } from 'three-loader-3dtiles';
 import './textarea';
+import { Vector3 } from 'three';
 
 if (typeof AFRAME === 'undefined') {
   throw new Error('Component attempted to register before AFRAME was available.');
@@ -28,7 +28,12 @@ AFRAME.registerComponent('loader-3dtiles', {
     pointcloudElevationRange: { type: 'array', default: ['0', '400'] },
     wireframe: { type: 'boolean', default: false },
     showStats: { type: 'boolean', default: false },
-    cesiumIONToken: { type: 'string' }
+    cesiumIONToken: { type: 'string' },
+    googleApiKey: { type: 'string' },
+    lat: { type: 'number' },
+    long: { type: 'number' },
+    height: { type: 'number' },
+    geoTransform: { type: 'string', default: 'Reset' }
   },
   init: async function () {
     this.camera = this.data.cameraEl?.object3D.children[0] ?? document.querySelector('a-scene').camera;
@@ -36,9 +41,11 @@ AFRAME.registerComponent('loader-3dtiles', {
       throw new Error('3D Tiles: Please add an active camera or specify the target camera via the cameraEl property');
     }
     const { model, runtime } = await this._initTileset();
+
     this.el.setObject3D('tileset', model);
 
     this.originalCamera = this.camera;
+
     this.el.sceneEl.addEventListener('camera-set-active', (e) => {
       // TODO: For some reason after closing the inspector this event is fired with an empty camera,
       // so revert to the original camera used.
@@ -46,6 +53,7 @@ AFRAME.registerComponent('loader-3dtiles', {
       // TODO: Does not provide the right Inspector perspective camera
       this.camera = e.detail.cameraEl.object3D.children[0] ?? this.originalCamera;
     });
+
     this.el.sceneEl.addEventListener('enter-vr', (e) => {
       this.originalCamera = this.camera;
       try {
@@ -86,7 +94,9 @@ AFRAME.registerComponent('loader-3dtiles', {
         this.runtime = null;
       }
       const { model, runtime } = await this._initTileset();
+
       this.el.setObject3D('tileset', model);
+
       await this._nextFrame();
       this.runtime = runtime;
     } else if (this.runtime) {
@@ -103,10 +113,24 @@ AFRAME.registerComponent('loader-3dtiles', {
       this.el.sceneEl.removeChild(this.stats);
       this.stats = null;
     }
+
+    // set parameters for google 3dtiles API
+    if (this.data.lat && this.data.long && this.data.height) {
+      // eslint-disable-next-line no-unused-vars
+      const { model, runtime } = await this._initTileset();
+
+      console.log(this.data.lat, this.data.long, this.data.height);
+
+      this.runtime.orientToGeocoord({
+        lat: Number(this.data.lat),
+        long: Number(this.data.long),
+        height: Number(this.data.height)
+      });
+    }
   },
   tick: function (t, dt) {
     if (this.runtime) {
-      this.runtime.update(dt, this.el.sceneEl.renderer, this.camera);
+      this.runtime.update(dt, this.el.sceneEl.clientHeight, this.camera);
       if (this.stats) {
         const worldPos = new Vector3();
         this.camera.getWorldPosition(worldPos);
@@ -139,20 +163,22 @@ AFRAME.registerComponent('loader-3dtiles', {
   },
   _initTileset: async function () {
     const pointCloudColoring = this._resolvePointcloudColoring(this.data.pointcloudColoring);
-
     return Loader3DTiles.load({
       url: this.data.url,
       renderer: this.el.sceneEl.renderer,
       options: {
-        dracoDecoderPath: 'https://unpkg.com/three@0.137.0/examples/js/libs/draco',
-        basisTranscoderPath: 'https://unpkg.com/three@0.137.0/examples/js/libs/basis',
+        googleApiKey: this.data.googleApiKey,
         cesiumIONToken: this.data.cesiumIONToken,
+        dracoDecoderPath: 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco',
+        basisTranscoderPath: 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/basis',
         maximumScreenSpaceError: this.data.maximumSSE,
         maximumMemoryUsage: this.data.maximumMem,
+        memoryCacheOverflow: 128,
+        pointCloudColoring: pointCloudColoring,
         viewDistanceScale: this.data.distanceScale,
         wireframe: this.data.wireframe,
-        pointCloudColoring: pointCloudColoring,
-        updateTransforms: true
+        updateTransforms: true,
+        geoTransform: GeoTransform[this.data.geoTransform]
       }
     });
   },

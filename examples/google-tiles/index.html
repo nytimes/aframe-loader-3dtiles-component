@@ -3,9 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>A-Frame 3D Tiles Component - Basic example</title>
-    <meta name="description" content="Basic example for 3D Tiles component showing photogrammetry."></meta>
+    <meta name="description" content="Basic example for 3D Tiles component showing google 3d Tiles."></meta>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="../../dist/aframe-loader-3dtiles-component.js"></script>
+    <!-- <script src="https://unpkg.com/3dstreet@0.4.5/dist/aframe-street-component.js"></script> -->
+
+        <!-- vr teleport controls -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls@0.4.3/dist/aframe-blink-controls.min.js"></script> -->
     <style>
       #guide {
         position: fixed;
@@ -26,17 +30,19 @@
   </head>
   <body>
     <a-scene vr-mode-ui="enabled: false" renderer="colorManagement: true;">
-      <a-camera id="camera"></a-camera>
+      <a-entity camera="fov:45; near:1; far: 1000" look-controls="reverseMouseDrag: true" wasd-controls="enabled: true" id="camera" cursor-teleport="cameraRig: #camera; cameraHead: #camera;"></a-entity>
       <a-entity
-        id="freeman-tiles"
-        position="-1.5 10 -28"
-        rotation="-90 0 90"
-        scale="2 2 2"
+        id="tileset"
         loader-3dtiles="
-         url: https://int.nyt.com/data/3dscenes/ONA360/TILESET/0731_FREEMAN_ALLEY_10M_A_36x8K__10K-PN_50P_DB/tileset_tileset.json; 
-         maximumSSE: 48;
-         cameraEl: #camera;
-        "
+          url: https://tile.googleapis.com/v1/3dtiles/root.json; 
+          lat: 37.77522354250163;
+          long: -122.41931773049723;
+          height: -16.5;
+          googleApiKey: INSERTYOURKEYHERE;
+          geoTransform: WGS84Cartesian;
+          maximumSSE: 48; 
+          maximumMem: 400;
+          cameraEl: #camera"
       >
       </a-entity>
     </a-scene>
@@ -49,13 +55,15 @@
     </a>
     <div id="guide">
       <span id="example-desc">
-        <b>Freeman Alley, New York.</b> Captured using iPhone 12 Pro Max and processed via RealityCapture.
+        <b>Google 3D Tiles example.</b>
       </span>
       <p>Use arrow/WASD keys to move around and click and drag to turn/rotate the camera.</p>
       <p>
-        <u>Available URL parameters:</u>
+        <u>Available component parameters:</u>
         <ul>
-          <li><b>tilesetUrl</b>: Load another tileset json.</li>
+          <li><b>lat, long</b>: coordinates of Google Map.</li>
+          <li><b>height</b>: camera height.</li>
+          <li><b>googleApiKey</b>: Google Api Key.</li>
         </ul>
       </p>
     </div>
